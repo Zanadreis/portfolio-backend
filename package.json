@@ -1,30 +1,32 @@
 {
   "name": "zanadreis-portifolio",
-  "version": "0.1.0",
-  "homepage": "https://zanadreis.com",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Backend API for demo in portifolio",
+  "author": "Zanadreis",
+  "license": "ISC",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "npx nodemon --exec babel-node index.js",
+    "build": "babel src -d ./dist/src --copy-files && babel index.js -d ./dist"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.17",
-    "@types/node": "^20.10.4",
-    "@types/react": "^18.2.42",
-    "@types/react-dom": "^18.2.17",
-    "aos": "^3.0.0-beta.6",
-    "next": "^14.0.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "^5.3.3"
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "axios": "^1.4.0",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.4.2"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.7",
-    "@types/aos": "^3.0.7",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.32",
-    "tailwindcss": "^3.3.6"
+    "nodemon": "^2.0.7"
   }
 }
