@@ -6,6 +6,10 @@ const driversRoute = require("./routes/driversRoute");
 const companiesRoute = require("./routes/companiesRoute");
 const reportsRoute = require("./routes/reportsRoute");
 
+router.get("/", (req, res) =>
+    res.status(200).send({ message: "Welcome to Portifolio API! Try the documentation at /docs" })
+);
+
 router.get("/health", (req, res) =>
     res.status(200).send({ message: "Health check ok!" })
 );
