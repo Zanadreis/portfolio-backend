@@ -1,6 +1,6 @@
 const ReportsRepository = require("../repository/reportsRepository");
 
-module.exports = class reportsService {
+module.exports = class reportsController {
   static async createReport(req, res) {
     const { drivers, _company} = req.body
 

@@ -1,10 +1,10 @@
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 const UsersRepository = require("../repository/userRepository");
-const authUrl = process.env.AUTH_URL;
+const authHelper = require('../helpers/authHelper');
 const saltRounds = Number(process.env.HASH_SALT);
 
-module.exports = class AuthServices {
+module.exports = class AuthController {
   static async signup(req, res) {
     let {name, email, password, role, company } = req.body;
     const HashedPassword = await bcrypt.hash(password, saltRounds);
@@ -16,6 +16,8 @@ module.exports = class AuthServices {
   static async login(req, res) {
     const {email, password} = req.body
 
+    if (!email || !password) return res.status(400).send({message: "Missing email or password"});
+
     const user = await UsersRepository.findUser({email: email});
     if (!user) return res.status(404).send({message: "User not found"});
 
@@ -24,7 +26,8 @@ module.exports = class AuthServices {
 
     user.password = undefined;
 
-    await axios.post(`${authUrl}/login`, { user })
+    // await axios.post(`${authUrl}/login`, { user })
+    authHelper.login({user})
     .then(function (response) {
         const {token} = response.data;
         return res.status(200).send({token: token});
@@ -40,7 +43,8 @@ module.exports = class AuthServices {
   
   static async logout(req, res) {
     const {token} = req.body
-    await axios.post(`${authUrl}/logout`, { token })
+    // await axios.post(`${authUrl}/logout`, { token })
+    authHelper.logout({token})
     .then(function (response) {
         return res.status(401).send(response.data);
     })

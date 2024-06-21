@@ -1,9 +1,9 @@
 const mongoose = require("../db/conn");
 const { Schema } = require("mongoose");
 
-const kmsConnection = mongoose.connection;
+const connection = mongoose.connection;
 
-const Reports = kmsConnection.model(
+const Reports = connection.model(
   "Reports",
   new Schema(
     {

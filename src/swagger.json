@@ -1,0 +1,31 @@
+{
+    "openapi": "3.0.0",
+    "host": "localhost:5000",
+    "basePath": "/",
+    "schemes": ["https", "http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "info":{
+        "title": "Portfolio Swagger",
+        "description": "Portfolio API documentation",
+        "termsOfService": "http://google.com",
+        "contact": {
+            "email": "tec.zanadreis@gmail.com.br"
+        },
+        "version": "1.0.0"    
+    },
+    "paths": {
+        "/health": {
+            "get": {
+                "tags": ["Health"],
+                "responses": {
+                    "200": {"description": "An 'OK' status for the API's health"},
+                    "Any other": {"description": "The API is offline"}
+                },
+                "summary": "API health check",
+                "description": "Recomended to be used on maintence service to check if the API is up and running. This will provice the status of the basical function of the API, without concerns of any Database or third part service."
+            }
+
+        }
+    }
+}

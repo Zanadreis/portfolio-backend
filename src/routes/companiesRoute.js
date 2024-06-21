@@ -1,7 +1,7 @@
 const express = require("express");
 const route = express.Router();
-const companiesServices = require("../services/companiesServices");
+const companiesController = require("../controllers/companiesController");
 
-route.post("/company", companiesServices.createCompany);
+route.post("/company", companiesController.createCompany);
 
 module.exports = route;

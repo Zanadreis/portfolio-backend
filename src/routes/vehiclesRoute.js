@@ -1,7 +1,7 @@
 const express = require("express");
 const route = express.Router();
-const vehiclesServices = require("../services/vehiclesServices");
+const vehiclesController = require("../controllers/vehiclesController");
 
-route.post("/vehicle", vehiclesServices.createVehicle);
+route.post("/vehicle", vehiclesController.createVehicle);
 
 module.exports = route;

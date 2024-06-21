@@ -1,24 +1,23 @@
 module.exports = async (req, res, next) => {
-    const axios = require('axios');
-    const authUrl = process.env.AUTH_URL;
-    const {token} = req.headers['x-access-token']
+    const authHelper = require('../helpers/authHelper')
+    const token = req.headers['x-access-token']
 
     const unauthenticatedRoutes = [
         '/health',
+        '/auth/signin',
+        '/auth/login',
+        '/docs'
     ];
 
-    if(unauthenticatedRoutes.includes(req.path)) return next();
-
-    axios.post(`${authUrl}/verify`, { token })
-    .then(function (response) {
-        const {auth, user} = response.data;
-        if(!auth) return res.status(401).send({message: "Unauthorized"});
-        req.body._company = user.company;
-        req.body._role = user.role;
-        return next()
-    })
-    .catch(function (error) {
-        console.log(error);
-        return res.status(404).send({message: "Failed to comunicate with authentication service"});
-    });
+    if(unauthenticatedRoutes.some(route => req.path.startsWith(route))) return next();
+    if(!token) return res.status(401).send({message: "No token was provided"});
+    
+    // Autentication should be done in a different API with reddis for better performance
+    // axios.post(`${authUrl}/verify`, { token })
+    const auth = authHelper.verify(token)
+    
+    if(!auth) return res.status(401).send({message: "Unauthorized"});
+    req.body._company = user.company;
+    req.body._role = user.role;
+    next()
 }

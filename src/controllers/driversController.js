@@ -1,6 +1,6 @@
 const DriversRepository = require("../repository/driversRepository");
 
-module.exports = class createServices {
+module.exports = class createController {
 
   static async getDrivers(req, res) {
     const { _company } = req.query;
