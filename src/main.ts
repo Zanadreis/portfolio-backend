@@ -19,6 +19,7 @@ async function bootstrap() {
     swaggerOptions: { defaultModelsExpandDepth: -1 }
   });
 
+  console.log(`Server started on port ${port}`)
   await app.listen(port || 3000);
 }
 bootstrap();
