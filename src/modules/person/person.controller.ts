@@ -1,6 +1,6 @@
-import { Body, Param, Controller, Get, Post, BadRequestException, NotFoundException } from '@nestjs/common';
+import { Body, Param, Controller, Get, Post, Put, BadRequestException, NotFoundException } from '@nestjs/common';
 import { PersonService } from './person.service';
-import { createPersonDto, getOnePersonDto, addFavoriteLocationDto } from '../../dtos/person.dto';
+import { createPersonDto, getOnePersonDto, editPersonDto, addFavoriteLocationDto } from '../../dtos/person.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { personSwagger } from '../../swagger/person.swagger';
 
@@ -34,6 +34,16 @@ export class PersonController {
         const { id } = params;
         const person = await this.personService.getById(id);
         if(!person) throw new NotFoundException('Could not find person');
+        return person;
+    }
+
+    @Put(':id')
+    @ApiOperation({ summary: `Update a person` })
+    @ApiResponse({ status: 201, type: personSwagger })
+    async updateLocation(@Param() params: getOnePersonDto, @Body() body: editPersonDto) {
+        const { id } = params;
+        const {name, lastName, age, sex} = body;
+        const person = await this.personService.updatePerson({id, name, lastName, age, sex});
         return person;
     }
 

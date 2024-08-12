@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString, MinLength, IsIn } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, MinLength, IsIn, isString, minLength, isNotEmpty } from 'class-validator';
 
 export class createPersonDto {
     @IsString()
@@ -30,6 +30,27 @@ export class getOnePersonDto {
     @IsNotEmpty()
     @ApiProperty()
     id: string
+}
+
+export class editPersonDto {
+    @IsString()
+    @ApiPropertyOptional()
+    name: string
+    
+    @IsString()
+    @ApiPropertyOptional()
+    lastName: string
+
+    @IsNumber()
+    @ApiPropertyOptional()
+    age: number
+    
+    @IsString()
+    @IsIn(['male', 'female'], {
+        message: 'sex must be either "male" or "female".',
+    })
+    @ApiPropertyOptional()
+    sex: string;
 }
 
 export class addFavoriteLocationDto {

@@ -26,6 +26,18 @@ export class PersonService {
     createPerson(person): Promise<Person> {
         return this.personEntity.save(person);
     }
+
+    async updatePerson ({id, name, lastName, age, sex}): Promise<Person> {
+        const person = await this.personEntity.findOneBy({ _id: new ObjectId(id) });
+        if(!person) throw new NotFoundException('Could not find location');
+        
+        person.name = name || person.name;
+        person.lastName = lastName || person.lastName;
+        person.age = age || person.age;
+        person.sex = sex || person.sex;
+
+        return this.personEntity.save(person);
+    }
     
     async addFavoriteLocation({person_id, location_id}): Promise<Person> {
         const person = await this.personEntity.findOneBy({ _id: new ObjectId(person_id) });
