@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString, MinLength, IsIn, isString, minLength, isNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, MinLength, IsIn, IsOptional, isString, minLength, isNotEmpty } from 'class-validator';
 
 export class createPersonDto {
     @IsString()
@@ -12,10 +12,12 @@ export class createPersonDto {
     @ApiProperty()
     lastName: string
 
+    @IsOptional()
     @IsNumber()
     @ApiPropertyOptional()
     age: number
     
+    @IsOptional()
     @IsString()
     @IsIn(['male', 'female'], {
         message: 'sex must be either "male" or "female".',
@@ -33,18 +35,22 @@ export class getOnePersonDto {
 }
 
 export class editPersonDto {
+    @IsOptional()
     @IsString()
     @ApiPropertyOptional()
     name: string
     
     @IsString()
+    @IsOptional()
     @ApiPropertyOptional()
     lastName: string
 
+    @IsOptional()
     @IsNumber()
     @ApiPropertyOptional()
     age: number
     
+    @IsOptional()
     @IsString()
     @IsIn(['male', 'female'], {
         message: 'sex must be either "male" or "female".',
