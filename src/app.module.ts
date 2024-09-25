@@ -12,7 +12,7 @@ import { ApiExcludeController } from '@nestjs/swagger';
 class AppController {
   @Get()
   root() {
-    return { message: 'API made by Guidance. See documentation at /docs' };
+    return { message: 'API made by Zanadreis. See documentation at /docs' };
   }
 }
 @Module({
