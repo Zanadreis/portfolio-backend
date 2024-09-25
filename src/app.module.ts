@@ -7,6 +7,14 @@ import { LocationModule } from './modules/location/location.module';
 import { PersonModule } from './modules/person/person.module';
 import { ApiExcludeController } from '@nestjs/swagger';
 
+@ApiExcludeController()
+@Controller()
+class AppController {
+  @Get()
+  root() {
+    return { message: 'API made by Guidance. See documentation at /docs' };
+  }
+}
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -20,16 +28,8 @@ import { ApiExcludeController } from '@nestjs/swagger';
     LocationModule,
     PersonModule
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 
-@ApiExcludeController()
-@Controller()
-class AppController {
-  @Get()
-  root() {
-    return 'API made by Zanadreis. See /docs for more information.';
-  }
-}
 export class AppModule {}
