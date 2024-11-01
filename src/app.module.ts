@@ -1,11 +1,11 @@
 import { Controller, Get, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UrlModule } from './modules/url/url.module';
 import { HealthModule } from './modules/health/health.module';
-import { LocationModule } from './modules/location/location.module';
-import { PersonModule } from './modules/person/person.module';
+import { VehicleModule } from './modules/vehicle/vehicle.module';
+import { DriverModule } from './modules/driver/driver.module';
 import { ApiExcludeController } from '@nestjs/swagger';
+import { VehicleAssignmentModule } from './modules/vehicleAssignment/vehicleAssignment.module';
 
 @ApiExcludeController()
 @Controller()
@@ -24,12 +24,11 @@ class AppController {
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
     HealthModule,
-    UrlModule,
-    LocationModule,
-    PersonModule
+    VehicleModule,
+    DriverModule,
+    VehicleAssignmentModule,
   ],
   controllers: [AppController],
   providers: [],
 })
-
 export class AppModule {}

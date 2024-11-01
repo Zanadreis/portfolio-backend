@@ -1,4 +1,4 @@
-import { CreateDateColumn, UpdateDateColumn, Column, ObjectIdColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
+import { CreateDateColumn, UpdateDateColumn, Column, ObjectIdColumn, BeforeInsert, BeforeUpdate, DeleteDateColumn } from 'typeorm';
 import { ObjectId } from 'mongodb';
 
 export abstract class UniversalEntity {
@@ -11,7 +11,10 @@ export abstract class UniversalEntity {
   @UpdateDateColumn({ type: 'timestamp' })
   updated_at: Date;
 
-  @Column({ default: true })
+  @DeleteDateColumn({ type: 'timestamp' })
+  deleted_at: Date;
+
+  @Column()
   isActive: boolean;
 
   @BeforeInsert()
@@ -19,6 +22,7 @@ export abstract class UniversalEntity {
     this._id = new ObjectId();
     this.created_at = new Date();
     this.updated_at = new Date();
+    this.isActive = true;
   }
 
   @BeforeUpdate()
